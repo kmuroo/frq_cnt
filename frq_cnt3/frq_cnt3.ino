@@ -3,7 +3,7 @@
 // https://qiita.com/hsgucci/items/eee5894e3651d0a8cb75
 // https://www.arduinolibraries.info/libraries/freq-count
 
-//#define STRICT
+#define STRICT
 // 未定義命令のチェックを厳密に行う
 //#define SEST_MODE
 // テスト用信号発生
@@ -31,7 +31,7 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  //int delta_t; //計数する時間(ミリ秒単位、デフォルト値1000)
+  int delta_t; //計数する時間(ミリ秒単位、デフォルト値1000)
 
   while ( Serial.available() == 0) { // キー入力待ち
   }
@@ -71,7 +71,7 @@ void loop() {
 #endif
     case 't': //タイマー間隔設定して開始, exapmle: t500 → 500 ms毎
       myString = Serial.readString();
-      int delta_t = myString.toInt();
+      delta_t = myString.toInt();
       Serial.println(delta_t, DEC);
       FreqCount.begin(delta_t);
       while ( Serial.available() == 0) { //シリアルポート入力がない間カウント継続
